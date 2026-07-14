@@ -3,6 +3,7 @@
 // system header files
 #include <iostream>
 #include <string>
+#include <sstream>
 #include <unordered_map>
 using namespace std;
 
@@ -124,13 +125,24 @@ Command parse_input(const string& input){
     string key;
     string value;
     
-
     //trim the input
     string trimmed = trim(input);
 
+    //using stringstream for extracting commands
+    stringstream ss;
 
+    ss << trimmed;
 
-    
+    // extracting from input
+    ss >> comnd;
+    ss >> key;
+    ss >> value;
+
+    // initialising the Command object
+    cmd.command = comnd;
+    cmd.key = key;
+    cmd.value = value;
+
     return cmd;
 
 }
@@ -168,6 +180,8 @@ int main(){
 
         // get the command out of input
         Command cmd = parse_input(input);
+
+        printf("\n");
 
         //process the command
         process_Command(store, cmd);
