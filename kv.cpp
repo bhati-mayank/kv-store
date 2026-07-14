@@ -5,6 +5,7 @@
 #include <string>
 #include <sstream>
 #include <unordered_map>
+#include <cctype>
 using namespace std;
 
 // database class
@@ -149,7 +150,68 @@ Command parse_input(const string& input){
 
 
 // function to process the commands
-void process_Command(KeyValueStore& store, Command& cmd){
+void process_Command(KeyValueStore& store, const Command& cmd){
+
+    string command = cmd.command;
+    string key     = cmd.key;
+    string value   = cmd.value;
+
+    //PUT
+    if(command == "PUT" ){
+        store.put(key, value);
+        cout << "OK";
+    }
+
+    //GET
+    else if(command == "GET"){
+        string s = store.get(key);
+        if(s == "")
+            cout << "NOT FOUND";
+        
+        else 
+            cout << s;
+    }
+
+    //REMOVE
+    else if(command == "REMOVE"){
+        bool flag = store.remove(key);
+
+        if(!flag)
+            cout << "INVALID";
+
+        else
+            cout << "OK";
+    }
+
+    //exists
+    else if(command == "EXISTS"){
+        bool flag = store.exists(key);
+
+        if(!flag)
+            cout << "NO";
+        
+        else 
+            cout << "YES";
+    }
+
+    //clear
+    else if(command == "CLEAR"){
+        store.clear();
+
+        cout << "OK";
+    }
+
+    //SIZE
+    else if(command == "SIZE"){
+        size_t size = store.size();
+
+        cout << size;
+    }
+
+    //unknown command
+    else {
+        cout << "UNKNOWN COMMAND";
+    }
 
 }
 
