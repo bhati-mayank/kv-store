@@ -81,13 +81,56 @@ public:
     string value;
 };
 
+
+//trim function
+string trim(const string &input){
+
+    //check if input is itself empty
+    if(input == "")
+        return "";
+
+    string s;
+
+    int i = 0;
+    int j = input.size() - 1;
+
+
+
+    // handle spaces and line characters
+    while( i != input.size() &&  (input[i] == ' ' || input[i] == '\t' || input[i] == '\n')){
+        i++;
+    }
+
+
+    //check if string exists after front trimming
+    if(i == input.size())
+        return "";
+
+    //handle spaces and line characters
+    while(  j >= 0  &&  (input[j] == ' ' || input[j] == '\t' || input[j] == '\n')){
+        j--;
+    }
+
+    return input.substr(i, j - i + 1);
+}
+
 // function to parse the input 
 Command parse_input(const string& input){
 
     Command cmd;
 
+    
+    string comnd;
+    string key;
+    string value;
+    
+
+    //trim the input
+    string trimmed = trim(input);
 
 
+
+    
     return cmd;
 
 }
