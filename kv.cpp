@@ -6,14 +6,14 @@
 #include <unordered_map>
 using namespace std;
 
-// command class
+// database class
 class KeyValueStore{
 
-private :
+private:
     // an hash map to store KEY-VALUE pair
     unordered_map< string, string > data;
 
-public :
+public:
 
     // Insert or update the key-value pair in data
     void put(const string& key, const string& value){
@@ -72,11 +72,62 @@ public :
 };
 
 
+// Command class
+struct Command{
+
+public:
+    string command;
+    string key;
+    string value;
+};
+
+// function to parse the input 
+Command parse_input(const string& input){
+
+    Command cmd;
+
+
+
+    return cmd;
+
+}
+
+
+// function to process the commands
+void process_Command(KeyValueStore& store, Command& cmd){
+
+}
+
+
 
 /*=========================*/
 /*      MAIN DRIVER      */
 /*=========================*/
 
 int main(){
+
+
+    //creating an object of keyvaluestore class
+    KeyValueStore store;
+
+    // infinite loop for taking inputs from command prompt
+    while(true){
+
+    
+
+        // input
+        string input;
+
+        cout << ">>" ;
+
+        //read the input 
+        getline(cin, input);
+
+        // get the command out of input
+        Command cmd = parse_input(input);
+
+        //process the command
+        process_Command(store, cmd);
+    }
     return 0;
 }
