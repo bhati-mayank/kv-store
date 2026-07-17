@@ -71,6 +71,11 @@ public:
     size_t size() const {
         return data.size();
     }
+
+    // help section
+    void help() const{
+        printf("\nPUT value key\nGET key\nREMOVE key\nEXISTS key\nCLEAR\nSIZE\n\n");
+    }
 };
 
 
@@ -159,17 +164,17 @@ void process_Command(KeyValueStore& store, const Command& cmd){
     //PUT
     if(command == "PUT" ){
         store.put(key, value);
-        cout << "OK";
+        cout << "OK\n";
     }
 
     //GET
     else if(command == "GET"){
         string s = store.get(key);
         if(s == "")
-            cout << "NOT FOUND";
+            cout << "NOT FOUND\n";
         
         else 
-            cout << s;
+            cout << s << '\n';
     }
 
     //REMOVE
@@ -177,10 +182,10 @@ void process_Command(KeyValueStore& store, const Command& cmd){
         bool flag = store.remove(key);
 
         if(!flag)
-            cout << "INVALID";
+            cout << "INVALID\n";
 
         else
-            cout << "OK";
+            cout << "OK\n";
     }
 
     //exists
@@ -188,17 +193,17 @@ void process_Command(KeyValueStore& store, const Command& cmd){
         bool flag = store.exists(key);
 
         if(!flag)
-            cout << "NO";
+            cout << "NO\n";
         
         else 
-            cout << "YES";
+            cout << "YES\n";
     }
 
     //clear
     else if(command == "CLEAR"){
         store.clear();
 
-        cout << "OK";
+        cout << "OK\n";
     }
 
     //SIZE
@@ -208,9 +213,13 @@ void process_Command(KeyValueStore& store, const Command& cmd){
         cout << size;
     }
 
+    else if(command == "HELP"){
+        store.help();
+    }
+
     //unknown command
     else {
-        cout << "UNKNOWN COMMAND";
+        cout << "UNKNOWN COMMAND\n";
     }
 
 }
@@ -244,6 +253,10 @@ int main(){
         Command cmd = parse_input(input);
 
         printf("\n");
+
+        //check if the cmd is EXIT
+        if(cmd.command == "EXIT")
+            break;
 
         //process the command
         process_Command(store, cmd);
